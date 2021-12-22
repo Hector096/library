@@ -28,3 +28,8 @@ class Person
     @name = @corrector.correct_name(@name)
   end
 end
+
+person = Person.new(18, 'johnDoeofhundry')
+person.validate_name
+
+puts person.name
