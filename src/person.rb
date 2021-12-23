@@ -1,12 +1,12 @@
-require_relative 'corrector'
-require_relative 'rental'
+require_relative('./corrector')
+require_relative('./rental')
 
 class Person
   attr_accessor :name, :age, :rentals, :parent_permission
   attr_reader :id
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
-    @id = Random.rand(1..10.000)
+  def initialize(age:, name: 'Unknown', parent_permission: true)
+    @id = Random.rand(1..1000)
     @name = name
     @age = age
     @parent_permission = parent_permission
@@ -32,5 +32,9 @@ class Person
 
   def validate_name
     @name = @corrector.correct_name(@name)
+  end
+
+  def to_s
+    "Name: #{@name}, ID: #{@id}, Age: #{@age}"
   end
 end
