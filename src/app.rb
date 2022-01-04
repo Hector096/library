@@ -1,10 +1,10 @@
+require 'json'
 require_relative './person'
 require_relative './student'
 require_relative './rental'
 require_relative './book'
 require_relative './teacher'
 require_relative './classroom'
-require_relative './persist'
 
 # Initialize the App class
 class App
@@ -12,20 +12,19 @@ class App
     @books = []
     @rentals = []
     @people = []
-    @persist = Persist.new
   end
 
   def save_data
     if @people.length != 0
-      @persist.persist_people(@people)
+      File.write("people.json", JSON.generate(@people), mode: "a")
     end
 
     if @books.length != 0
-      @persist.persist_book(@books)
+      File.write("books.json", JSON.generate(@books), mode: "a")
     end
 
     if @rentals.length != 0
-      @persist.persist_rental(@rentals)
+      File.write("rentals.json", JSON.generate(@rentals), mode: "a")
     end
   end
 
