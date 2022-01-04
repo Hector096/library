@@ -12,14 +12,16 @@ class App
     @books = File.read('books.json').split || []
     @rentals = File.read('rentals.json').split || []
     @people = File.read('people.json').split || []
+
+    
   end
 
   def save_data
-    File.write('people.json', JSON.generate(@people), mode: 'a') unless @people.empty?
+    File.write('people.json',JSON.dump(@people), mode: 'a') unless @people.empty?
 
-    File.write('books.json', JSON.generate(@books), mode: 'a') unless @books.empty?
+    File.write('books.json', JSON.dump(@books), mode: 'a') unless @books.empty?
 
-    File.write('rentals.json', JSON.generate(@rentals), mode: 'a') unless @rentals.empty?
+    File.write('rentals.json', JSON.dump(@rentals), mode: 'a') unless @rentals.empty?
   end
 
   def handle_action(option)
