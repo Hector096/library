@@ -29,7 +29,7 @@ class Main
 
       @app.handle_action option
     end
-
+    @app.save_data
     puts 'Thank you for using this app!'
   end
 end

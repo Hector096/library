@@ -4,6 +4,7 @@ require_relative './rental'
 require_relative './book'
 require_relative './teacher'
 require_relative './classroom'
+require_relative './persist'
 
 # Initialize the App class
 class App
@@ -11,6 +12,21 @@ class App
     @books = []
     @rentals = []
     @people = []
+    @persist = Persist.new
+  end
+
+  def save_data
+    if @people.length != 0
+      @persist.persist_people(@people)
+    end
+
+    if @books.length != 0
+      @persist.persist_book(@books)
+    end
+
+    if @rentals.length != 0
+      @persist.persist_rental(@rentals)
+    end
   end
 
   def handle_action(option)
