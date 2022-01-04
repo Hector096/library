@@ -9,23 +9,17 @@ require_relative './classroom'
 # Initialize the App class
 class App
   def initialize
-    @books = []
-    @rentals = []
-    @people = []
+    @books = File.read('books.json').split || []
+    @rentals = File.read('rentals.json').split || []
+    @people = File.read('people.json').split || []
   end
 
   def save_data
-    if @people.length != 0
-      File.write("people.json", JSON.generate(@people), mode: "a")
-    end
+    File.write('people.json', JSON.generate(@people), mode: 'a') unless @people.empty?
 
-    if @books.length != 0
-      File.write("books.json", JSON.generate(@books), mode: "a")
-    end
+    File.write('books.json', JSON.generate(@books), mode: 'a') unless @books.empty?
 
-    if @rentals.length != 0
-      File.write("rentals.json", JSON.generate(@rentals), mode: "a")
-    end
+    File.write('rentals.json', JSON.generate(@rentals), mode: 'a') unless @rentals.empty?
   end
 
   def handle_action(option)

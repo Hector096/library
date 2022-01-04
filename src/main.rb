@@ -1,4 +1,5 @@
 require_relative './app'
+require 'json'
 
 class Main
   def initialize
