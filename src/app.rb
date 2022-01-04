@@ -9,17 +9,38 @@ require_relative './classroom'
 # Initialize the App class
 class App
   def initialize
-    @books = File.read('books.json').split || []
-    @rentals = File.read('rentals.json').split || []
-    @people = File.read('people.json').split || []
+    book_file = 'books.json'
+    people_file = 'people.json'
+    rentals_file = 'rentals.json'
+
+    if File.exist? book_file
+      @books = []
+      JSON.parse(File.read(book_file)).each { |entrie| @books.push(entrie) }
+    else
+      @books = []
+    end
+
+    if File.exist? people_file
+      @people = []
+      JSON.parse(File.read(people_file)).each { |entrie| @people.push(entrie) }
+    else
+      @people = []
+    end
+
+    if File.exist? rentals_file
+      @rentals = []
+      JSON.parse(File.read(rentals_file)).each { |entrie| @rentals.push(entrie) }
+    else
+      @rentals = []
+    end
   end
 
   def save_data
-    File.write('people.json', JSON.generate(@people), mode: 'a') unless @people.empty?
+    File.write('people.json', JSON.generate(@people)) unless @people.empty?
 
-    File.write('books.json', JSON.generate(@books), mode: 'a') unless @books.empty?
+    File.write('books.json', JSON.generate(@books)) unless @books.empty?
 
-    File.write('rentals.json', JSON.generate(@rentals), mode: 'a') unless @rentals.empty?
+    File.write('rentals.json', JSON.generate(@rentals)) unless @rentals.empty?
   end
 
   def handle_action(option)
