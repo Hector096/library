@@ -5,42 +5,15 @@ require_relative './rental'
 require_relative './book'
 require_relative './teacher'
 require_relative './classroom'
+require_relative './data'
 
 # Initialize the App class
 class App
+  include Data
   def initialize
-    book_file = 'books.json'
-    people_file = 'people.json'
-    rentals_file = 'rentals.json'
-
-    if File.exist? book_file
-      @books = []
-      JSON.parse(File.read(book_file)).each { |entrie| @books.push(entrie) }
-    else
-      @books = []
-    end
-
-    if File.exist? people_file
-      @people = []
-      JSON.parse(File.read(people_file)).each { |entrie| @people.push(entrie) }
-    else
-      @people = []
-    end
-
-    if File.exist? rentals_file
-      @rentals = []
-      JSON.parse(File.read(rentals_file)).each { |entrie| @rentals.push(entrie) }
-    else
-      @rentals = []
-    end
-  end
-
-  def save_data
-    File.write('people.json', JSON.generate(@people)) unless @people.empty?
-
-    File.write('books.json', JSON.generate(@books)) unless @books.empty?
-
-    File.write('rentals.json', JSON.generate(@rentals)) unless @rentals.empty?
+    @books = load_books
+    @people = load_people
+    @rentals = load_rental
   end
 
   def handle_action(option)
@@ -112,6 +85,7 @@ class App
     specialization = gets.chomp
 
     teacher = Teacher.new(age: age, name: name, specialization: specialization)
+    puts teacher.specialization
     @people.push(teacher)
 
     puts 'Person created successfully'
