@@ -2,8 +2,10 @@ require_relative('./person')
 
 # Inherits from Person
 class Teacher < Person
-  def initialize(age:, specialization:, name: 'Unknown', parent_permission: true)
-    super(name: name, age: age, parent_permission: parent_permission)
+  attr_accessor :specialization
+
+  def initialize(age:, specialization:, id: nil, name: 'Unknown', parent_permission: true)
+    super(id: id, name: name, age: age, parent_permission: parent_permission)
     @specialization = specialization
   end
 

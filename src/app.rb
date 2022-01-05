@@ -1,16 +1,19 @@
+require 'json'
 require_relative './person'
 require_relative './student'
 require_relative './rental'
 require_relative './book'
 require_relative './teacher'
 require_relative './classroom'
+require_relative './data'
 
 # Initialize the App class
 class App
+  include Persist
   def initialize
-    @books = []
-    @rentals = []
-    @people = []
+    @books = load_books
+    @people = load_people
+    @rentals = load_rental
   end
 
   def handle_action(option)
@@ -82,6 +85,7 @@ class App
     specialization = gets.chomp
 
     teacher = Teacher.new(age: age, name: name, specialization: specialization)
+    puts teacher.specialization
     @people.push(teacher)
 
     puts 'Person created successfully'
