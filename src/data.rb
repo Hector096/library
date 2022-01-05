@@ -5,7 +5,7 @@ require_relative './book'
 require_relative './teacher'
 require_relative './classroom'
 
-module Data
+module Persist
   def load_people
     if File.exist? 'people.json'
       JSON.parse(File.read('people.json')).map do |people|

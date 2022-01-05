@@ -9,7 +9,7 @@ require_relative './data'
 
 # Initialize the App class
 class App
-  include Data
+  include Persist
   def initialize
     @books = load_books
     @people = load_people
