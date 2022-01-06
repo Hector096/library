@@ -1,22 +1,19 @@
-require_relative '../book'
+require_relative '../classroom'
+require_relative('../student')
 
 
-describe Book do 
+describe Classroom do 
     context "It should create book and add rentals" do 
-        book = Book.new("Harry Potter","JK Rowling")
-       it "should create a neww book" do 
-          expect(book.title).to eq "Harry Potter" 
-          expect(book.author).to eq "JK Rowling"
+        classroom = Classroom.new("Microverse")
+        student = Student.new(age: 22,classroom: nil, name: "Leo", parent_permission: true)
+       it "should create a classroom" do 
+          expect(classroom.label).to eq "Microverse" 
        end 
          
-       it "should add new rentals" do 
-          book.add_rental(book)
-          expect(book.rentals.length).to eq 1
+       it "should add new student to classroom" do 
+        classroom.add_student(student)
+          expect(student.classroom.label).to eq "Microverse"
        end 
-
-       it "should return book in string" do 
-        expect(book.to_s).to eq  "Title: \"Harry Potter\", Author: JK Rowling"
-     end 
        
     end 
  end
