@@ -2,7 +2,7 @@ require_relative '../student'
 require_relative '../classroom'
 
 describe Student do 
-    context "When providing person information" do
+    context "When providing student information" do
         classroom = Classroom.new('Microverse')
         person = Student.new(id:nil,classroom:classroom,age: 22, name: "leo", parent_permission: true)
         
